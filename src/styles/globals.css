@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #ECE9DA;
+  --ink: #4A3B2A;        /* основной текст */
+  --ink-soft: #6B4F2A;   /* акцент, ссылки */
+  --ink-muted: #7A6A55;  /* второстепенный текст */
+  --paper-dark: #E2DDC8; /* hover для бежевых кнопок */
+  --footer: #3A2E20;     /* тёмный коричневый футер */
+}
+
+body {
+  @apply antialiased;
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+/* Бумага */
+.paper-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.42  0 0 0 0 0.37  0 0 0 0 0.24  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+
+.paper-stains {
+  background-image:
+    radial-gradient(600px 400px at 15% 20%, rgba(255,255,255,0.55), transparent 60%),
+    radial-gradient(500px 350px at 85% 80%, rgba(214,206,182,0.55), transparent 60%),
+    radial-gradient(400px 300px at 60% 10%, rgba(255,255,255,0.35), transparent 60%);
+  mix-blend-mode: soft-light;
+}
+
+/* UI */
+.input {
+  @apply w-full border rounded-xl px-3 py-2 focus:outline-none focus:ring-2;
+  border-color: #C9C2AC;
+  background-color: #FFFFFF;
+  color: var(--ink);
+}
+.input:focus {
+  border-color: transparent;
+  --tw-ring-color: var(--ink-soft);
+}
+
+/* Основная кнопка — бежевая с коричневым текстом */
+.btn {
+  @apply inline-flex items-center justify-center px-6 py-2.5 rounded-xl font-medium transition;
+  background-color: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink-soft);
+}
+.btn:hover {
+  background-color: var(--paper-dark);
+}
+
+/* Вторичная — «контурная», тоже бежево-коричневая */
+.btn-outline {
+  @apply inline-flex items-center justify-center px-6 py-2.5 rounded-xl font-medium transition;
+  background-color: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--ink-soft);
+}
+.btn-outline:hover {
+  background-color: var(--paper-dark);
+  color: var(--ink);
+}
+
+/* Контрастная (если где-то нужна) — коричневая с бежевым текстом */
+.btn-solid {
+  @apply inline-flex items-center justify-center px-6 py-2.5 rounded-xl font-medium transition;
+  background-color: var(--ink-soft);
+  color: var(--paper);
+  border: 1px solid var(--ink-soft);
+}
+.btn-solid:hover {
+  background-color: var(--ink);
+}
+
+.card {
+  @apply bg-white rounded-2xl border shadow-sm hover:shadow-xl transition overflow-hidden;
+  border-color: #DDD6C2;
+}
+
+/* Ссылки-акценты */
+.link-accent {
+  color: var(--ink-soft);
+}
+.link-accent:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}

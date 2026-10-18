@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("ADMIN")
+  createdAt    DateTime @default(now())
+}
+
+model Setting {
+  key   String @id
+  value String
+}
+
+model Tour {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  region      String
+  format      String
+  durationH   Int
+  priceFrom   Int?
+  priceTo     Int?
+  departureAt DateTime?
+  coverImage  String?
+  summary     String?
+  schedule    String?
+  includes    String?
+  excludes    String?
+  published   Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  requests    Request[]
+}
+
+model Request {
+  id        String   @id @default(cuid())
+  tourId    String?
+  tour      Tour?    @relation(fields: [tourId], references: [id], onDelete: SetNull)
+  name      String
+  phone     String
+  people    Int?
+  transfer  String?
+  comment   String?
+  type      String   @default("tour")
+  processed Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
